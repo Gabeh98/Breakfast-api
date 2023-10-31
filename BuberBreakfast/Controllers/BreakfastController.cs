@@ -11,19 +11,19 @@ public class BreakfastController : ControllerBase
         return Ok(request);
     }
 
-    [HttpGet("/{id:guid}")]
+    [HttpGet("{id:guid}")]
     public IActionResult GetBreakfast(Guid id)
     {
         return Ok(id);
     }
 
-    [HttpPut("/{id:guid}")]
+    [HttpPut("{id:guid}")]
     public IActionResult UpsertBreakfast(Guid id, UpsertBreakfastRequest request)
     {
         return Ok(request);
     }
 
-    [HttpDelete("/{id:guid}")]
+    [HttpDelete("{id:guid}")]
     public IActionResult DeleteBreakfast(Guid id)
     {
         return Ok(id);
