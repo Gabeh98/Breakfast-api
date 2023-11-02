@@ -1,7 +1,7 @@
 using BuberBreakfast.Models;
+using ErrorOr;
 
 namespace BuberBreakfast.Services.Breakfasts;
-
 public class BreakfastService : IBreakfastsService
 {
     private static readonly Dictionary<Guid, Breakfast> _breakfasts = new();
@@ -15,13 +15,19 @@ public class BreakfastService : IBreakfastsService
         _breakfasts.Remove(id);
     }
 
-    public Breakfast GetBreakfast(Guid id)
+    public ErrorOr<Breakfast> GetBreakfast(Guid id)
     {
-        return _breakfasts[id];
+        if (_breakfasts.TryGetValue(id, out var breakfast))
+        {
+            return breakfast;
+        }
+        return Errors.Cases.Breakfast.NotFound;
     }
 
     public void UpdateBreakfast(Breakfast breakfast)
     {
         _breakfasts[breakfast.Id] = breakfast;
     }
+
+
 }
